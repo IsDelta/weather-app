@@ -20,25 +20,30 @@ function initMap(location) {
 function findCity() {
     let city = document.getElementById('cityNameField').value;
     generateMap(city);
-    return false;
+}
 
+function addWeatherInfoOnSite(parametrs) {
+    let weather = document.getElementById('weatherInfo');
+    weather.innerHTML = 
+    `Температура : ${parametrs.Temperature.Metric.Value} C. По ощущениям : ${parametrs.RealFeelTemperature.Metric.Value} C. <br>
+    На небе: ${parametrs.WeatherText} <br>
+    Ветер ${(parametrs.Wind.Speed.Metric.Value / 3.6).toFixed(2)} м/с`
 }
 
 function getWetherByKey(key) {
-    let url = (`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=aJ7lv4L6tLHDwjVcLDBD7R3G0up5bkGe&language=ru`);
+    let url = (`http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=aJ7lv4L6tLHDwjVcLDBD7R3G0up5bkGe&language=ru&details=true`);
     var key = 0;
     fetch(url)
         .then((response) => {
             return response.json();
         })
         .then((message) => {
-            console.log(message[0].WeatherText)
+            addWeatherInfoOnSite(message[0]);
         })
         .catch(console.log);
 }
-function getWether() {
-    let lat = 53.90453979999999,
-        lng = 27.5615244;
+
+function getWether(lat, lng) {
     let url1 = (`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=aJ7lv4L6tLHDwjVcLDBD7R3G0up5bkGe&q=${lat},${lng}&language=ru`);
     fetch(url1)
         .then((response) => {
@@ -64,6 +69,7 @@ function generateMap(city) {
                 let location = message.results[0].geometry.location;
                 console.log(`${location.lat}  +  ${location.lng}`)
                 initMap(location);
+                getWether(location.lat, location.lng)
             } else alert(message.status);
         })
         .catch(console.log)
