@@ -1,7 +1,61 @@
 * {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: #444;
+  margin: 0;
 }
 #map {
-    height: 400px;
-    width: 100%;
+  height: 400px;
+  width: 100%;
+}
+.header {
+  padding: 10px 50px;
+}
+h1 {
+  font-weight: normal;
+  color: #fff;
+}
+.search {
+  margin-bottom: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  max-width: 400px;
+}
+
+.search input {
+  width: 100%;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #eee;
+  margin: 0;
+}
+
+.search button {
+  width: 50px;
+  color: RED;
+  padding: 7px 12px;
+  font-size: 18px;
+  background: #eee;
+  border: none;
+  margin: 0;
+}
+.search button:hover {
+  cursor: pointer;
+  background: #ddd;
+}
+#weatherInfo {
+  color: #fff;
+  background: #5e5e5e;
+  padding: 20px;
+}
+.historyBlock {
+    padding: 20px;
+}
+#history {
+    padding: 10px;
+    max-width: 300px;
+  background: #ddd;
 }

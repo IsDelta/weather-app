@@ -10,13 +10,20 @@
 </head>
 
 <body>
-    <h1>Карта</h1>
-    <input id="cityNameField" type="text" placeholder="Введите город">
-    <button onclick="findCity()">></button>
+    <div class="header">
+        <h1>Карта</h1>
+        <div class="search">
+            <input id="cityNameField" type="text" placeholder="Введите город">
+            <button onclick="findCity()">
+                <img src="img/search.svg" alt="">
+            </button>
+        </div>
+    </div>
     <div id="map"></div>
-
     <div id="weatherInfo"></div>
-
+    <div class="historyBlock">
+        <h1>История:</h1>
+        <div id="history"></div></div>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwMl0omeD63dGH_rxJZR7IFU3WV_UpAgA&callback=initMap"></script>
     <script src="js/main.js"></script>
