@@ -1,5 +1,9 @@
-getVisistorPosition();
+let $$ = function(str) {
+  return document.getElementById(str);
+};
 
+getVisistorPosition();
+generateHistoryBlock(localStorage.history);
 //let historySet = new Set();
 function initMap(location) {
   var uluru = {
@@ -15,27 +19,35 @@ function initMap(location) {
     map: map
   });
 }
-let $$ = function(str) {
-  return document.getElementById(str);
-};
-function addIntoHistory(city) {
-  let hist = $$("history");
-  let historyList = hist.innerHTML.split("<br>");
-  historyList.forEach((item, i, arr) => {
-    if (item == city) {
-      arr.splice(i, 1);
-    }
-  });
 
-  chekHistoryList();
-  function chekHistoryList() {
-    if (historyList.length < 5) {
-      historyList.unshift(city);
-      hist.innerHTML = historyList.join("<br>");
-    } else {
-      historyList.pop();
-      chekHistoryList(city);
+function generateHistoryBlock(place) {
+  let hist = $$("history");
+  hist.innerHTML = place;
+}
+
+function addIntoHistory(city) {
+  if (localStorage.history) {
+    let historyList = localStorage.history.split("<br>");
+    historyList.forEach((item, i, arr) => {
+      if (item == city) {
+        arr.splice(i, 1);
+      }
+    });
+
+    chekHistoryList();
+    function chekHistoryList() {
+      if (historyList.length < 5) {
+        historyList.unshift(city);
+        generateHistoryBlock(historyList.join("<br>"));
+        localStorage.history = historyList.join("<br>");
+      } else {
+        historyList.pop();
+        chekHistoryList(city);
+      }
     }
+  } else {
+    localStorage.history = city;
+    generateHistoryBlock(localStorage.history);
   }
 }
 // function addIntoHistory(str) {
