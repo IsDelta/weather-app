@@ -21,6 +21,7 @@ function initMap(location) {
 }
 
 function generateHistoryBlock(place) {
+  if (place === undefined) place = ''; 
   let hist = $$("history");
   hist.innerHTML = place;
 }
